@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipeee Main Page</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Pretendard', 'Malgun Gothic', '맑은 고딕', sans-serif;
+            overflow: hidden;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 28pt;
+            color: black;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .logo::after {
+            content: "";
+            display: block;
+            width: 990%;
+            height: 1.5px;
+            background-color: black;
+            margin-top: 6px; 
+        }
+
+        .search-bar {
+            display: flex;
+            padding: 10px 10px;
+            align-items: center;
+        }
+        .search-bar input[type="text"] {
+            padding: 5px;
+            font-size: 14pt;
+            border: none;
+            outline: none;
+        }
+        .search-bar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .search-bar button img {
+            width: 24px;
+            height: 24px;
+        }
+        .search-bar::after {
+            content: "";
+            display: block;
+            width: 1.5px;
+            height: 24px; 
+            background-color: black;
+            margin: 0 10px; 
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: flex-start; 
+            align-items: center; 
+            position: relative;
+            margin: 0 30px;
+            padding: 0 30px;
+            overflow: auto;
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        .top, .bottom {
+            width: 50%;
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .top img, .bottom img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 80px;
+        }
+
+        .image-container {
+            position: relative; 
+        }
+
+        .image-text {
+            position: absolute;
+            top: -300px;
+            right: -130px;
+            transform: translate(0, -50%);
+            font-size: 72px;
+            color: black;
+            white-space: nowrap;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .bottom {
+            max-width: 50%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px 90px; 
+            padding: 20px;
+            justify-content: center; 
+            align-items: center; 
+        }
+
+.bottom img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; 
+}
+
+.bottom img.animate {
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+        .bottom img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            opacity: 0; 
+            transition: transform 0.5.s, opacity 0.5s ease-in-out; 
+        }
+        
+        .bottom img.animate {
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        .info {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            background-color: rgba(255, 255, 255, 1.0);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow
+            : 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-in-out, slideIn 0.8s ease-in-out;
+            overflow-y: auto;
+        }
+        
+        table {
+            width: 66%;
+            margin-top: 10px;
+            border-collapse: collapse;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center; 
+        }
+        
+        .category-panel {
+            display: none; 
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 1000;
+            font-size: 10pt;
+            color: rgb(78, 78, 78);
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .category-panel ul {
+            list-style: none;
+            padding: 0; 
+            margin: 0; 
+        }
+
+        .category-panel li {
+            margin: 15px 0;
+            cursor: pointer; 
+        }
+
+        .category-panel a {
+            text-decoration: none;
+            color: rgb(78, 78, 78);
+        }
+
+        .search-bar button img {
+            width: 19px; 
+            height: 19px; 
+            margin-right: 5px; 
+        }
+
+        .menu-button img {
+            width: 19px; 
+            height: 19px; 
+            margin-left: 5px; 
+        }
+
+        .menu-button {
+            cursor: pointer;
+            padding: 5px;
+            height: 50%;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+.main-content li {
+    list-style: none;
+    margin-left: 0; 
+}
+
+.main-content li {
+    margin-bottom: 10px; 
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+        .cooking-steps {
+            width: 66%; 
+            text-align: center; 
+        }
+
+        .cooking-steps h4 {
+            margin: 10px 0; 
+        }
+
+        .category-panel {
+            display: none; 
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 1000;
+            font-size: 10pt;
+            color: rgb(78, 78, 78);
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .category-panel ul {
+            list-style: none;
+            padding: 0; 
+            margin: 0; 
+        }
+
+        .category-panel li {
+            margin: 15px 0;
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">Recipeee.</div>
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <button>
+                    <img src="images/돋보기.png" alt="Search">
+                </button>
+            </div>
+            <div class="menu-button">
+                <img src="images/카테고리.png" alt="Menu">
+            </div>
+        </div>
+    </div>
+    <div class="category-panel" id="categoryPanel">
+        <h2>About</h2>
+        <ul>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+        <h2>More+</h2>
+        <ul>
+            <li><a href="연어포케.html">Hajin Kim</a></li>
+            <li><a href="index2.html">Jisu Lee</a></li>
+            <li><a href="세은.html">Seeun Yoon</a></li>
+            <li><a href="muyoung.html">Muyoung Jin</a></li>
+            <li><a href="정승민.html">Seungmin Jeong</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="top">
+            <a href="#">
+                <img id="mainImage" src="images/연어포케 배경.png" alt="연어포케">
+            </a>
+            <div class="image-container">
+                <div class="image-text">Fresh, Healthy, Organic, Delicious!</div>
+            </div>
+        </div>
+        <li>포케는 자른다는 하와이 말로 날생선을 샐러드와 같이 곁들여먹는 회무침 연어 요리이다.</li>
+        <li>깍둑썰기 한 참치나 연어에 아보카도, 양상추 등과 곁들여 밥 위에 올려먹는 회덮밥이라고 생각하면 되는데,</li>
+        <li>초장에 비벼 먹는 흔히 알고 있는 맛과는 달리 간장이나 마요네즈 소스와 아삭한 채소가 같이 어우러지는 맛이</li>
+        <li>매력있는 메뉴이다.</li>
+        <h3>재료</h3>
+        <table>
+            <tr><td>연어 200g</td></tr>
+            <tr><td>아보카도 1/2</td></tr>
+            <tr><td>오이 1/2</td></tr>
+            <tr><td>양파 1/2</td></tr>
+            <tr><td>양상추</td></tr>
+            <tr><td>어린잎 믹스 2줌</td></tr>
+            <tr><td>레몬 한조각</td></tr>
+        </table>
+        <div class="cooking-steps">
+            <h3>조리 순서</h3>
+            <ul>
+                <li>
+                    <h4>1. 샐러드 채소를 준비한다.</h4>
+                    <p>양파를 얇게 슬라이스해준다.</p>
+                    <p>오이는 굵은소금으로 씻은 뒤 4등분으로 썰어준다.</p>
+                </li>
+                <li>
+                    <h4>2. 양상추와 어린잎 채소를 세척한 뒤 물기를 털어준다.</h4>
+                    <p>믹스로 된 걸로 준비하면 보다 간편하다.</p>
+                </li>
+                <li>
+                    <h4>3. 아보카도를 준비한다.</h4>
+                    <p>아보카도를 검은빛으로 먹기 좋게 후숙된 걸 반으로 잘라 껍질을 벗겨준다.</p>
+                    <p>아보카도도 한 입에 먹기 좋게 네모나게 썰어준다.</p>
+                </li>
+                <li>
+                    <h4>4. 연어를 준비한다.</h4>
+                    <p>연어를 깍둑썰기로 썰어준다.</p>
+                    <p>* 포케 소스는 간장 2T, 쯔유 1T, 설탕 1T, 레몬즙 1T, 다진 마늘 1t, 참기름 2T, 후추 약간.</p>
+                    <p>와사비 마요네즈 소스는 마요네즈+스리라차 또는 마요네즈+간장+와사비 조합으로 준비해준다. 연어에 밑간해주면 감칠맛이 더 좋다.</p>
+                </li>
+                <li>
+                    <h4>5. 소스를 넣고 버무려준다.</h4>
+                    <p>* 덮밥을 만들 때 다시마 한 조각을 넣고 밥을 지으면 전체적으로 감칠맛이 더 좋다.</p>
+                </li>
+                <li>
+                    <h4>6. 그릇에 한 김 식힌 밥을 담고 가장자리로 샐러드 채소를 올려준다.</h4>
+                    <p>* 포케에 곁들이는 재료는 기호에 따라 옥수수 콘, 날치알 등을 올려주면 된다.</p>
+                </li>
+                <li>
+                    <h4>7. 밑간해둔 연어를 올려준다.</h4>
+                </li>
+                <li>
+                    <h4>8. 상큼하게 어울리는 레몬 한 조각을 올려주면 연어포케 완성.</h4>
+                </li>
+            </ul>
+        </div>
+        <!-- 하단 이미지 -->
+        <div class="bottom">
+            <div class="image-container">
+                <img src="images/연어.png" alt="연어">
+                <p>Salmon</p>
+            </div>
+            <div class="image-container">
+                <img src="images/샐러드.png" alt="샐러드">
+                <p>Salad</p>
+            </div>
+            <div class="image-container">
+                <img src="images/아보카도.png" alt="아보카도">
+                <p>Abocado</p>
+            </div>
+            <div class="image-container">
+                <img src="images/밥.png" alt="-밥">
+                <p>Rice</p>
+        </div>
+        
+    </div>
+    <script>
+        document.querySelector('.menu-button').addEventListener('click', function() {
+            var categoryPanel = document.querySelector('.category-panel');
+            if (categoryPanel.style.display === 'block') {
+                categoryPanel.style.display = 'none';
+            } else {
+                categoryPanel.style.display = 'block';
+            }
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        });
+
+        document.querySelectorAll('.bottom img').forEach(img => {
+            observer.observe(img);
+        });
+
+window.addEventListener('scroll', function() {
+    var images = document.querySelectorAll('.bottom img');
+    var triggerBottom = window.innerHeight / 5 * 4;
+    
+    images.forEach(function(img) {
+        var imgTop = img.getBoundingClientRect().top;
+
+        if(imgTop < triggerBottom) {
+            img.classList.add('animate');
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
