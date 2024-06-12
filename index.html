@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1조_기말</title>
     <style>
-       
         body {
             display: flex;
             flex-direction: column;
@@ -14,8 +13,6 @@
             font-family: 'Pretendard', 'Malgun Gothic', '맑은 고딕', sans-serif;
             overflow: hidden;
         }
-        
-       
         .header {
             display: flex;
             justify-content: space-between;
@@ -24,7 +21,6 @@
             padding: 10px 20px;
             box-sizing: border-box;
         }
-
         .logo {
             font-size: 28pt;
             color: black;
@@ -38,8 +34,6 @@
             background-color: black;
             margin-top: 6px;
         }
-
-      
         .search-bar {
             display: flex;
             padding: 10px 10px;
@@ -69,8 +63,6 @@
             background-color: black;
             margin: 0 10px;
         }
-
-      
         .category-panel {
             display: none;
             position: absolute;
@@ -92,26 +84,20 @@
         .category-panel li {
             margin: 15px 0;
         }
-
-        
         .menu-button img {
             width: 19px;
             height: 19px;
             margin-left: 5px;
         }
-
-        
         .menu-button {
             cursor: pointer;
             padding: 5px;
             height: 50%;
         }
-       
         .header-right {
             display: flex;
             align-items: center;
         }
-
         .color-button {
             border: 0.5pt solid black; 
             cursor: pointer;
@@ -127,13 +113,11 @@
             position: absolute;
             text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000; 
         }
-
         .image-container {
             position: absolute;
             border: 0.5pt solid black;
             border-radius: 5px;
         }
-
         @media (max-width: 768px) {
             .color-button {
                 font-size: 24pt;
@@ -149,46 +133,35 @@
                 margin: 10px;
             }
         }
-
         .image-container img {
             width: 100%;
             height: 100%;
             border-radius: 5px;
             object-fit: cover;
         }
-
         #Salmon\ Poke img {
             object-fit: contain;
         }
-
         .main-content li {
-    list-style: none;
-    margin-left: 0; 
-}
-
-
-.main-content li {
-    margin-bottom: 10px; 
-    animation: fadeIn 1.5s ease-in-out;
-}
-
-       
+            list-style: none;
+            margin-left: 0; 
+        }
+        .main-content li {
+            margin-bottom: 10px; 
+            animation: fadeIn 1.5s ease-in-out;
+        }
         .cooking-steps {
             width: 66%; 
             text-align: center; 
         }
-
         .cooking-steps h4 {
             margin: 10px 0; 
         }
-
         .image-container {
             position: absolute;
             border: 0.5pt solid black;
             border-radius: 5px;
         }
-
-      
         .category-panel {
             display: none; 
             position: absolute;
@@ -209,12 +182,10 @@
             padding: 0;
             margin: 0; 
         }
-
         .category-panel li {
             margin: 15px 0;
             cursor: pointer;
         }
-
         .category-panel a {
             text-decoration: none;
             color: rgb(78, 78, 78);
@@ -222,20 +193,15 @@
     </style>
 </head>
 <body>
-
     <div class="header">
-    
         <div class="logo">Recipeee.</div>
-      
         <div class="header-right">
-      
             <div class="search-bar">
                 <input type="text" placeholder="Search">
                 <button>
                     <img src="https://i.imgur.com/wN0z0EC.png" alt="Search">
                 </button>
             </div>
-           
             <div class="menu-button" onclick="toggleCategoryPanel()">
                 <img src="https://i.imgur.com/OGNR0dz.png" alt="Menu">
             </div>
@@ -246,7 +212,6 @@
         <h2>About</h2>
         <ul>
             <li><a href="about2.html">About Us</a></li>
-       
         </ul>
         <h2>More+</h2>
         <ul>
@@ -258,8 +223,7 @@
         </ul>
     </div>
 
-
-    <a href="min.html">
+    <a href="min.html" id="salmonSteakLink">
         <div id="Salmon Steak" class="image-container" style="width: 125mm; height: 44mm; top: 180px; left: 120px; z-index: 1;">
             <img src="https://i.imgur.com/6nWoKAO.jpeg" alt="Salmon Steak">
         </div>
@@ -276,61 +240,4 @@
     </a>
     <a href="muyoung.html">
         <div id="Tomato Spaghetti" class="image-container" style="width: 122mm; height: 47mm; top: 380px; left: 410px; z-index: 2;">
-            <img src="https://i.imgur.com/ClJ0KPJ.jpeg" alt="Tomato Spaghetti">
-        </div>
-    </a>
-    <a href="hajin.html">
-        <div id="Salmon Poke" class="image-container" style="top: 530px; right: 320px; width: 100mm; height: 58mm; background-color: transparent; border: none; z-index: 1;">
-            <img src="https://i.imgur.com/TRRmf4Y.jpeg" alt="Salmon Poke">
-        </div>
-    </a>
-
-    <script>
-        function toggleCategoryPanel() {
-            var panel = document.getElementById('categoryPanel');
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
-            } else {
-                panel.style.display = 'block';
-            }
-        }
-    </script>
-
-<script>
-	
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-</script>
-</body>
-</html>
+            <img src="https://i.imgur
